@@ -1,0 +1,65 @@
+{
+    "name": "imputControl",
+    "maps": [
+        {
+            "name": "Route",
+            "id": "271519aa-7ee2-41fd-8577-14ccd7af56de",
+            "actions": [
+                {
+                    "name": "MoveForRoute",
+                    "type": "Value",
+                    "id": "a7ba3175-aaf4-4491-ab83-702c02782336",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ClickForRouteStart",
+                    "type": "Value",
+                    "id": "47333e77-dcc7-4a05-8b5f-1ffc32d633dc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "441a9a95-8764-4771-a360-7bcd08747cf6",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveForRoute",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d465a4c7-c6cf-4d04-9389-98d693e6f595",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveForRoute",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ff0398b6-abec-4b79-be9f-b80285ad9e72",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ClickForRouteStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
