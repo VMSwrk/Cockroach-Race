@@ -125,7 +125,6 @@ public class DBService
 
     public int CreateLevel(LevelClass level)
     {
-        Debug.Log("levelJSON: " + JsonUtility.ToJson(level));
         int r = _connection.Insert(level);
 
         if (r != 1)

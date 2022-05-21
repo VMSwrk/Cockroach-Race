@@ -8,31 +8,34 @@ using System;
 public class LevelClass : MonoBehaviour  // Структура для уровня
 {
     [SerializeField]
-    public int numberCurenLevel; // { get; set; } // Номер уровня
+    public int numberCurenLevel { get; set; } // Номер уровня
+
+    [SerializeField]
+    public string levelJSON { get; set; }
 
     // КП
-    // [SerializeField]
-    public int numberKP; // { get; set; } // Количество контрольных точек
+    [SerializeField]
+    public int numberKP { get; set; } // Количество контрольных точек
 
-    // [SerializeField]
-    public List<Vector3> positionKP = new List<Vector3>();
+    [SerializeField]
+    public string positionKPJSON { get; set; }
 
-    // [SerializeField]
-    public List<int> valueKP = new List<int>();
+    [SerializeField]
+    public string valueKPJSON { get; set; }
 
 
     // Лабиринт
     [SerializeField]
-    public int numberlabirint; // { get; set; } // Количество элементов лабиринта
+    public int numberlabirint { get; set; } // Количество элементов лабиринта
 
-    // [SerializeField]
-    public List<Vector3> positionLabirint = new List<Vector3>();
+    [SerializeField]
+    public string positionLabirintJSON { get; set; }
 
-    // [SerializeField]
-    public List<Quaternion> rotationLabirint = new List<Quaternion>();
+    [SerializeField]
+    public string rotationLabirintJSON { get; set; }
 
-    // [SerializeField]
-    public List<Vector3> scaleLabirint = new List<Vector3>();
+    [SerializeField]
+    public string scaleLabirintJSON { get; set; }
 
 }
 

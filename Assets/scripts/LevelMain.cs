@@ -14,10 +14,11 @@ public class LevelMain : MonoBehaviour
     public int numberCurenLevel; // Номер уровня
     public int numberKP; // Количество контрольных точек
     public int numberlabirint; // Количество элементов лабиринта
-    public Vector3[] positionKP; // Массив положений КП
-    public int[] valueKP; // Массив значений КП
-    // public Vector3[] positionLabirint, scaleLabirint;
-    public Quaternion[] rotationLabirint;
+    public List<Vector3> positionKP; // Массив положений КП
+    public List<int> valueKP; // Массив значений КП
+    public List<Vector3> positionLabirint;
+    public List<Vector3> scaleLabirint;
+    public List<Quaternion> rotationLabirint;
 
     // Расчет времени
     public float timeStart; // Время старта
@@ -88,29 +89,29 @@ public class LevelMain : MonoBehaviour
     void InicObject()
     {
         kp = new GameObject[numberKP]; // Создали массив, далее numberKP должно из сохранения приходить
-        positionKP = new Vector3[numberKP]; // Массив положений точек, далее будем загружать
-        valueKP = new int[numberKP];
+        // positionKP = new Vector3[numberKP]; // Массив положений точек, далее будем загружать
+        // valueKP = new int[numberKP];
         labirint = new GameObject[numberlabirint];
         // positionLabirint = new Vector3[numberlabirint];
         // rotationLabirint = new Quaternion[numberlabirint];
         // scaleLabirint = new Vector3[numberlabirint];
 
         level = new LevelClass();
-        // level.positionKP = new List<Vector3>();
-        // level.valueKP = new List<int>();
-        // level.positionLabirint = new List<Vector3>();
-        // level.rotationLabirint = new List<Quaternion>();
-        // level.scaleLabirint = new List<Vector3>();
+        positionKP = new List<Vector3>();
+        valueKP = new List<int>();
+        positionLabirint = new List<Vector3>();
+        rotationLabirint = new List<Quaternion>();
+        scaleLabirint = new List<Vector3>();
     }
     void InstallationLevel()
     {
 
         for (int i = 0; i < level.numberKP; i++)
         {
-            kp[i] = Instantiate(kpPref, level.positionKP[i], kpPref.transform.rotation, GameObject.Find("KP").transform); // Выгружаем КП
+            kp[i] = Instantiate(kpPref, positionKP[i], kpPref.transform.rotation, GameObject.Find("KP").transform); // Выгружаем КП
 
             kp[i].GetComponent<KP>().kpID = i;
-            kp[i].GetComponent<KP>().valueKP = level.valueKP[i];
+            kp[i].GetComponent<KP>().valueKP = valueKP[i];
             nameObject = "KP" + i.ToString();
             kp[i].name = nameObject;
 
@@ -118,8 +119,8 @@ public class LevelMain : MonoBehaviour
 
         for (int i = 0; i < level.numberlabirint; i++)
         {
-            labirint[i] = Instantiate(labirintPref, level.positionLabirint[i], level.rotationLabirint[i], GameObject.Find("labirint").transform);
-            labirint[i].transform.localScale = level.scaleLabirint[i];
+            labirint[i] = Instantiate(labirintPref, positionLabirint[i], rotationLabirint[i], GameObject.Find("labirint").transform);
+            labirint[i].transform.localScale = scaleLabirint[i];
             nameObject = "labirint" + i.ToString();
             labirint[i].name = nameObject;
         }
@@ -294,8 +295,8 @@ public class LevelMain : MonoBehaviour
     {
         // Вынесли отдлеьно, т.к. создавать массивы можно только полсу получения информации об их количестве
         kp = new GameObject[numberKP]; // Создали массив, далее numberKP должно из сохранения приходить
-        positionKP = new Vector3[numberKP]; // Массив положений точек, далее будем загружать
-        valueKP = new int[numberKP];
+        // positionKP = new Vector3[numberKP]; // Массив положений точек, далее будем загружать
+        // valueKP = new int[numberKP];
 
         // Заполняем уровень лабиринтом
         labirint = new GameObject[numberlabirint];
@@ -312,24 +313,24 @@ public class LevelMain : MonoBehaviour
     //     level.numberKP = numberKP;
     //     level.numberlabirint = numberlabirint;
 
-    //     level.valueKP = new int[level.numberKP];
-    //     level.positionKP = new Vector3[level.numberKP];
+    //     valueKP = new int[level.numberKP];
+    //     positionKP = new Vector3[level.numberKP];
 
     //     for (int i = 0; i < level.numberKP; i++)
     //     {
-    //         level.valueKP[i] = kp[i].GetComponent<KP>().valueKP;
-    //         level.positionKP[i] = kp[i].transform.position;
+    //         valueKP[i] = kp[i].GetComponent<KP>().valueKP;
+    //         positionKP[i] = kp[i].transform.position;
     //     }
 
-    //     level.positionLabirint = new Vector3[level.numberlabirint];
-    //     level.rotationLabirint = new Quaternion[level.numberlabirint];
-    //     level.scaleLabirint = new Vector3[level.numberlabirint];
+    //     positionLabirint = new Vector3[level.numberlabirint];
+    //     rotationLabirint = new Quaternion[level.numberlabirint];
+    //     scaleLabirint = new Vector3[level.numberlabirint];
 
     //     for (int i = 0; i < level.numberlabirint; i++)
     //     {
-    //         level.positionLabirint[i] = labirint[i].transform.position;
-    //         level.rotationLabirint[i] = labirint[i].transform.rotation;
-    //         level.scaleLabirint[i] = labirint[i].transform.localScale;
+    //         positionLabirint[i] = labirint[i].transform.position;
+    //         rotationLabirint[i] = labirint[i].transform.rotation;
+    //         scaleLabirint[i] = labirint[i].transform.localScale;
     //     }
 
     //     // level.routeAI = new List<Vector3>;
@@ -410,21 +411,21 @@ public class LevelMain : MonoBehaviour
         level.numberKP = 4;
         level.numberlabirint = 2;
 
-        level.positionKP.Add(new Vector3(5.75f, 0.56f, -3.71f));
-        level.positionKP.Add(new Vector3(10.43f, 0.56f, -13.09f));
-        level.positionKP.Add(new Vector3(-10.59f, 0.56f, -0.87f));
-        level.positionKP.Add(new Vector3(1.45f, 0.56f, -8.28f));
-        level.valueKP.Add(1);
-        level.valueKP.Add(1);
-        level.valueKP.Add(2);
-        level.valueKP.Add(3);
+        positionKP.Add(new Vector3(5.75f, 0.56f, -3.71f));
+        positionKP.Add(new Vector3(10.43f, 0.56f, -13.09f));
+        positionKP.Add(new Vector3(-10.59f, 0.56f, -0.87f));
+        positionKP.Add(new Vector3(1.45f, 0.56f, -8.28f));
+        valueKP.Add(1);
+        valueKP.Add(1);
+        valueKP.Add(2);
+        valueKP.Add(3);
 
-        level.positionLabirint.Add(new Vector3(3.09f, 1.5f, -8f));
-        level.positionLabirint.Add(new Vector3(-3.84f, 1.5f, -0.80f));
-        level.rotationLabirint.Add(new Quaternion(0f, -0.29f, 0f, 0.96f));
-        level.rotationLabirint.Add(new Quaternion(0f, 0.39f, 0f, 0.92f));
-        level.scaleLabirint.Add(new Vector3(0.5f, 2f, 11f));
-        level.scaleLabirint.Add(new Vector3(0.5f, 2f, 14f));
+        positionLabirint.Add(new Vector3(3.09f, 1.5f, -8f));
+        positionLabirint.Add(new Vector3(-3.84f, 1.5f, -0.80f));
+        rotationLabirint.Add(new Quaternion(0f, -0.29f, 0f, 0.96f));
+        rotationLabirint.Add(new Quaternion(0f, 0.39f, 0f, 0.92f));
+        scaleLabirint.Add(new Vector3(0.5f, 2f, 11f));
+        scaleLabirint.Add(new Vector3(0.5f, 2f, 14f));
 
     }
 
@@ -449,16 +450,25 @@ public class LevelMain : MonoBehaviour
     public void ButtonDownSave()
     {
         var dbs = new DBService(); // Получили базу
-        // Debug.Log("levelJSON: " + JsonUtility.ToJson(level));
-        // level.levelJSON = JsonUtility.ToJson(level);
+                                   // Debug.Log("levelJSON: " + JsonUtility.ToJson(level));
+                                   // level.levelJSON = JsonUtility.ToJson(level);
 
+        level = new LevelClass();
+        level.positionKPJSON = JsonUtility.ToJson(positionKP);
+        level.valueKPJSON = JsonUtility.ToJson(valueKP);
+        level.positionLabirintJSON = JsonUtility.ToJson(positionLabirint);
+        level.rotationLabirintJSON = JsonUtility.ToJson(rotationLabirint);
+        level.scaleLabirintJSON = JsonUtility.ToJson(scaleLabirint);
+        level.levelJSON = JsonUtility.ToJson(level);
+
+        Debug.Log(level);
         dbs.CreateLevel(level);
         // level.test = new Vector3[numberKP];
-        // level.positionKP = new List<Vector3>();
+        // positionKP = new List<Vector3>();
 
         // Debug.Log("kp:" + JsonUtility.ToJson(level.kp));
         // Debug.Log("test:" + JsonUtility.ToJson(level.test));
-        // Debug.Log("positionKP (list):" + JsonUtility.ToJson(level.positionKP));
+        // Debug.Log("positionKP (list):" + JsonUtility.ToJson(positionKP));
 
 
 
